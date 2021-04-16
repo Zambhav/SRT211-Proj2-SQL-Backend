@@ -52,12 +52,17 @@ try:
         mycursor2 = mydb.cursor(buffered=True)
         # Executing the SQL query
         mycursor2.execute(query_empid,val3)
-        print("<br>Please don't lose your Employee ID number.",print(mycursor2.fetchall()))
+        myresult = mycursor2.fetchall()
+        for x in myresult:
+            for y in x:
+                print("<h3>Your employee id is",y,"<br>Please don't lose your Employee ID number.</h3>")
         # Closing cursor        
         mycursor1.close()
         mycursor2.close()
     # Closing cursor
     mycursor.close()
+
+    # 
     mydb.close()  
 except mysql.connector.Error as err:
     print(err)
