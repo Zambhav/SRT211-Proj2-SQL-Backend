@@ -1,6 +1,4 @@
-#!C:\Users\Work\AppData\Local\Programs\Python\Python39\python.exe
-#/usr/bin/python3
-
+#!/usr/bin/python3
 # Import mysql module (DB API)
 import mysql.connector
 import cgi
