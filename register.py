@@ -24,16 +24,14 @@ try:
     # Creating cursor
     mycursor = mydb.cursor(buffered=True)
 
-    num = mycursor.rowcount
-
     # Check if email exists
     query_check = "SELECT emp_email, COUNT(*) FROM employees WHERE  emp_email = %s GROUP by emp_lname"
     val1 = (email,)
 
     # Executing the SQL query
     mycursor.execute(query_check,val1)
-    mycursor.close()
-    if num <= 0:
+    num = mycursor.rowcount
+    if num >= 1:
         print("Email already exists, user cannot be registed.")
     else:
         # Cursor for Insert
@@ -58,6 +56,7 @@ try:
         mycursor1.close()
         mycursor2.close()
     # mycursor.execute(query,val2)
+    mycursor.close()
     mydb.close()  
 except mysql.connector.Error as err:
     print(err)
