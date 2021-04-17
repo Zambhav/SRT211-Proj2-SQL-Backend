@@ -2,23 +2,54 @@
 # Import mysql module (DB API)
 import mysql.connector
 import cgi
-from http import cookies
 import cgitb
 cgitb.enable()
 
 # Get access to the FORM data
 fromData = cgi.FieldStorage()
-empid = fromData["empid"].value
-passwd = fromData["passwd"].value
+try:
+    empid = fromData["empid"].value
+except KeyError:
+    empid = "Undefined"
 
-cookie = cookies.SimpleCookie()
+try:
+    passwd = fromData["passwd"].value
+except KeyError:
+    passwd = "Undefined"
 
-cookie[empid] = passwd
-cookie[empid]["domain"] = "172.20.23.172"
+try:
+    # Connecting to MySQL database
+    mydb = mysql.connector.connect(host="localhost", user="root", password="", database="Project2")
 
-page = """Content-Type: text/html
+    # Creating cursor
+    mycursor = mydb.cursor(buffered=True)
+
+    # Check if user exists
+    query_check = "SELECT * FROM `login` WHERE emp_id=%s AND emp_passhash = %s"
+    val = (empid,passwd)
+
+    mycursor.execute(query_check, val)
+    num = mycursor.rowcount
+    if num >= 1:
+        from http import cookies
+        import datetime
+        import uuid 
+        cookie = cookies.SimpleCookie()
+        cookie[empid] = passwd
+        cookie[empid]["domain"] = "172.20.23.172"
+        expires = datetime.datetime.utcnow() + datetime.timedelta(seconds=10)
+        cookie[empid]['expires'] = expires.strftime("%a, %d %b %Y %H:%M:%S GMT")
+        #note that the headers are printed here as well
+        #also note that the blank line after the cookies is mandatory
+        #the indentation matters
+        page = """Content-Type: text/html
 {cookie}
 
-hoe
+User exists
 """
-print(page.format(cookie=cookie))
+        print(page.format(cookie=cookie))
+    else:
+        print("Content-Type: text/html \n\n")
+        print("Contact administrator as user not found or password provided was wrong. Try resetting your password.")
+except mysql.connector.Error as err:
+    print("Something went wrong<br><meta http-equiv = 'refresh' content = 'time; URL=404-notfound.html'/>")
