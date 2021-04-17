@@ -45,7 +45,7 @@ try:
         page = """Content-Type: text/html
 {cookie}
 
-User exists
+<meta http-equiv="refresh" content="0; url=404-notfound.html" />
 """
         print(page.format(cookie=cookie))
     else:
