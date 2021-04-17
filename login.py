@@ -7,7 +7,7 @@ print("Content-Type: text/html \n\n")
 # Get access to the FORM data
 fromData = cgi.FieldStorage()
 email = fromData.getvalue('email')
-passwd = fromData.getvalue('password')
+passwd = fromData.getvalue('passwd')
 
 print(email)
 print(passwd)
