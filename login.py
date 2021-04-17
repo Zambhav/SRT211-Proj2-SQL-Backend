@@ -20,7 +20,7 @@ except KeyError:
 
 try:
     # Connecting to MySQL database
-    mydb = mysql.connector.connect(host="localhost", user="root", password="", database="Project2")
+    mydb = mysql.connector.connect(host="localhost", user="root", password="", database="project2")
 
     # Creating cursor
     mycursor = mydb.cursor(buffered=True)
