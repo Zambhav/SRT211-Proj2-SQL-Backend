@@ -2,12 +2,23 @@
 # Import mysql module (DB API)
 import mysql.connector
 import cgi
-print("Content-Type: text/html \n\n")
+from http import cookies
+import cgitb
+cgitb.enable()
 
 # Get access to the FORM data
 fromData = cgi.FieldStorage()
-email = fromData.getvalue('email')
-passwd = fromData.getvalue('passwd')
+empid = fromData["empid"].value
+passwd = fromData["passwd"].value
 
-print(email)
-print(passwd)
+cookie = cookies.SimpleCookie()
+
+cookie[empid] = passwd
+cookie[empid]["domain"] = "172.20.23.172"
+
+page = """Content-Type: text/html
+{cookie}
+
+hoe
+"""
+print(page.format(cookie=cookie))
