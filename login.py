@@ -1,5 +1,6 @@
-#!C:\Users\Work\AppData\Local\Programs\Python\Python39\python.exe
-#/usr/bin/python3
+#!/usr/bin/python3
+#C:\Users\Work\AppData\Local\Programs\Python\Python39\python.exe
+
 # Import mysql module (DB API)
 import mysql.connector
 import cgi
@@ -38,7 +39,7 @@ try:
         cookie = cookies.SimpleCookie()
         cookie[empid] = passwd
         cookie[empid]["domain"] = "172.20.23.172"
-        expires = datetime.datetime.utcnow() + datetime.timedelta(seconds=10)
+        expires = datetime.datetime.utcnow() + datetime.timedelta(minutes=10)
         cookie[empid]['expires'] = expires.strftime("%a, %d %b %Y %H:%M:%S GMT")
         #note that the headers are printed here as well
         #also note that the blank line after the cookies is mandatory
@@ -46,9 +47,10 @@ try:
         page = """Content-Type: text/html
 {cookie}
 
-<meta http-equiv="refresh" content="0; url=404-notfound.html" />
+<meta http-equiv="refresh" content="0; url=aboutMe.py" />
 """
         print(page.format(cookie=cookie))
+        # forwardPage = open("aboutMe.py")
     else:
         print("Content-Type: text/html \n\n")
         print("Contact administrator as user not found or password provided was wrong. Try resetting your password.")
