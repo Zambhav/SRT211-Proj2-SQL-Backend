@@ -38,7 +38,6 @@ try:
         import uuid 
         cookie = cookies.SimpleCookie()
         cookie[empid] = passwd
-        cookie[empid]["domain"] = "172.20.23.172"
         expires = datetime.datetime.utcnow() + datetime.timedelta(minutes=10)
         cookie[empid]['expires'] = expires.strftime("%a, %d %b %Y %H:%M:%S GMT")
         #note that the headers are printed here as well
