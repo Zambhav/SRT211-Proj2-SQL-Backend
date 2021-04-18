@@ -36,18 +36,23 @@ try:
         from http import cookies
         import datetime
         import uuid 
+        # Cookie adds emp_id and maps it to emp_passhash as a dictionary element inside a list.
         cookie = cookies.SimpleCookie()
         cookie[empid] = passwd
+        # Makes use of uuid and datetime to convert local timezone to "GMT" timezone for 10 minutes 
         expires = datetime.datetime.utcnow() + datetime.timedelta(minutes=10)
+        # Appends 'exipres' and the time being specified as another dictonary element with in cookie list.
         cookie[empid]['expires'] = expires.strftime("%a, %d %b %Y %H:%M:%S GMT")
         #note that the headers are printed here as well
         #also note that the blank line after the cookies is mandatory
         #the indentation matters
+        # Format on how the cookies needs to be added to the webpage and redirects to the "aboutMe.py"
         page = """Content-Type: text/html
 {cookie}
 
 <meta http-equiv="refresh" content="0; url=aboutMe.py" />
 """
+        # Prints the cookie on the webpage which is ingested by the browser 
         print(page.format(cookie=cookie))
     else:
         print("Content-Type: text/html \n\n")

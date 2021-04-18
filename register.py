@@ -47,6 +47,7 @@ try:
 
         # Commiting changes
         mydb.commit()
+        # Grabbing employee id which was auto incremenated for the user.
         query_empid = "select emp_id from employees where emp_email = %s"
         val3 = (email,)
 
@@ -61,7 +62,7 @@ try:
                       "<br>Please don't lose your Employee ID number.</h3> <a href='Login.html' class='login-forgot-pass'>Login</a>")
                 # Creating cursor for password
                 mycursor3 = mydb.cursor(buffered=True)
-                # Passes query
+                # Inserts the employee ID and employee password inside the `login` table
                 query_password = "INSERT INTO `login`(`emp_id`, `emp_passhash`) VALUES (%s,%s)"
                 val4 = (empid, passwd)
                 mycursor3.execute(query_password, val4)

@@ -9,19 +9,20 @@ print("Content-Type: text/html \n\n")
 
 # Error Handling
 try:
+    # Reads cookie data by looking for "HTTP_COOKIE" in OS environment, if cookie not found it redirects to 404-notfound.html.
     if "HTTP_COOKIE" in os.environ :
         cookie_info = os.environ["HTTP_COOKIE"]
         cookie_info = cookie_info.split('; ')
         for cookie in cookie_info:
-            print
             cookie = cookie.split('=')
+            # Saves each element of cookie as empID and passwd from list of cookie
             empID = cookie[0]
             passwd = cookie[1]
 
-            # Connecting to MySQL database
+            # Connecting to MySQL database to check autheticate user, if doesnt authenticate it redirects user to 404-notfound.html
             mydb = mysql.connector.connect(host="localhost", user="root", password="", database="project2")
 
-            # Creating cursor
+            # Creating cursor specifically handiling users's password hash and id.
             mycursor = mydb.cursor(buffered=True)
 
             query_check = "SELECT `emp_id`,`emp_passhash` FROM `login` WHERE `emp_id`=%s AND `emp_passhash`=%s"
@@ -29,11 +30,13 @@ try:
 
             mycursor.execute(query_check, val)
             num = mycursor.rowcount
+            # Now user has been validated it trys to get employee information which will be populated in "aboutMe.html"
             if num >= 1:
                 mycursor1 = mydb.cursor(buffered=True)
                 query = "SELECT `emp_id`,`emp_fname`,`emp_lname`,`emp_role`,`emp_addr`,`emp_email`,`emp_hiredate` FROM `employees` WHERE `emp_id`=%s"
                 val1 = (empID, )
-
+                
+                # New cursor was opened because it is dealing with not senstive information.
                 mycursor1.execute(query,val1)
                 myresult = mycursor1.fetchall()
                 for x in myresult:
