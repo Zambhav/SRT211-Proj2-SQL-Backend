@@ -50,7 +50,6 @@ try:
 <meta http-equiv="refresh" content="0; url=aboutMe.py" />
 """
         print(page.format(cookie=cookie))
-        # forwardPage = open("aboutMe.py")
     else:
         print("Content-Type: text/html \n\n")
         print("Contact administrator as user not found or password provided was wrong. Try resetting your password.")

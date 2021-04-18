@@ -5,31 +5,27 @@
     <link rel="stylesheet" href="1.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
     <script src="hashing.js"></script>
-    <script>
-        function popup() { alert("Employee Not Found! Re-Enter Information!") }
-    </script>
-
 </head>
 
 
 <body>
-    <form method="GET" class="login-form" action="ResetPassword-Check.py">
+    <form method="GET" class="login-form">
         <fieldset>
             <h1 style="color:rgb(184, 180, 180);">About Me</h1>
             <h4 style="color:rgb(184, 180, 180);">My Employee ID</h4>
-            <input type="number" class="login-field" name="emp_id" value={emp_id:} readonly />
+            <input type="text" class="login-field" name="empid" value="{emp_id:}" readonly />
             <h4 style="color:rgb(184, 180, 180);">First Name</h4>
-            <input type="text" class="login-field" name="fname" value={emp_fname:} readonly />
+            <input type="text" class="login-field" name="fname" id="fname" value="{fname:}" readonly />
             <h4 style="color:rgb(184, 180, 180);">Last Name</h4>
-            <input type="text" class="login-field" name="lname" value={emp_lname:} readonly />
+            <input type="text" class="login-field" name="lname" id="lname" value="{lname:}" readonly />
             <h4 style="color:rgb(184, 180, 180);">My Email </h4>
-            <input type="email" class="login-field" name="email" value={email:} readonly />
+            <input type="email" class="login-field" name="email" id="email" value="{email:}" readonly />
             <h4 style="color:rgb(184, 180, 180);">Job Title</h4>
-            <input type="text" class="login-field" name="role" value={role:} readonly />
+            <input type="text" class="login-field" name="role" id="role" value="{role:}" readonly />
             <h4 style="color:rgb(184, 180, 180);">My Home Address</h4>
-            <input type="text" class="login-field" name="address" value={address:} readonly />
+            <input type="text" class="login-field" name="address" id="address" value="{address:}" readonly />
             <h4 style="color:rgb(184, 180, 180);">My Hire Date</h4>
-            <input type="date" class="login-field" name="hiredate" value={hiredate:} readonly />
+            <input type="date" class="login-field" name="hiredate" id="hiredate" value="{hiredate:}" readonly />
         </fieldset>
     </form>
     <div class="underlay-photo"></div>

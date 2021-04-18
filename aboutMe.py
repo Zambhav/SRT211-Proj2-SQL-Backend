@@ -32,22 +32,20 @@ try:
             if num >= 1:
                 mycursor1 = mydb.cursor(buffered=True)
                 query = "SELECT `emp_id`,`emp_fname`,`emp_lname`,`emp_role`,`emp_addr`,`emp_email`,`emp_hiredate` FROM `employees` WHERE `emp_id`=%s"
-                val1 = (empID,)
+                val1 = (empID, )
 
                 mycursor1.execute(query,val1)
                 myresult = mycursor1.fetchall()
                 for x in myresult:
-                    emp_id = x[0]
+                    eid = x[0]
                     fname = x[1]
                     lname = x[2]
                     role = x[3]
                     address = x[4]
                     email = x[5]
                     hiredate = x[6]
-                    forwardPage = open("aboutMe.html").read().format(emp_id=emp_id, emp_fname=fname, emp_lname=lname, email=email, role=role, address=address, hiredate=hiredate)
-                    print(forwardPage)
-                else:
-                    print("Something went wrong<br><meta http-equiv = 'refresh' content = 'time; URL=404-notfound.html'/>")
+                forwardPage = open('aboutMe.html').read().format(emp_id=eid, fname=fname, lname=lname, email=email, role=role, address=address, hiredate=hiredate)
+                print(forwardPage)
                 mycursor1.close()
             else:
                     print("Something went wrong<br><meta http-equiv = 'refresh' content = 'time; URL=404-notfound.html'/>")
@@ -55,34 +53,5 @@ try:
             mydb.close()
     else:
         print("Something went wrong<br><meta http-equiv = 'refresh' content = 'time; URL=404-notfound.html'/>")
-    # Open reset passwords html with the employee id populated
-except mysql.connector.DataError as err:
-    print("Encountered DataError <br>")
-    print("Error Code: ", err.errno)
-    print("<br> SQL State: ", err.sqlstate)
-    print("<br> Error Message: ", err.msg)
-except mysql.connector.InternalError as err:
-    print("Encountered InternalError <br>")
-    print("Error Code: ", err.errno)
-    print("<br> SQL State: ", err.sqlstate)
-    print("<br> Error Message: ", err.msg)
-except mysql.connector.IntegrityError as err:
-    print("Encountered IntegrityError <br>")
-    print("Error Code: ", err.errno)
-    print("<br> SQL State: ", err.sqlstate)
-    print("<br> Error Message: ", err.msg)
-except mysql.connector.OperationalError as err:
-    print("Encountered OperationalError <br>")
-    print("Error Code: ", err.errno)
-    print("<br> SQL State: ", err.sqlstate)
-    print("<br> Error Message: ", err.msg)
-except mysql.connector.NotSupportedError as err:
-    print("Encountered NotSupportedError <br>")
-    print("Error Code: ", err.errno)
-    print("<br> SQL State: ", err.sqlstate)
-    print("<br> Error Message: ", err.msg)
-except mysql.connector.ProgrammingError as err:
-    print("Encountered ProgrammingError <br>")
-    print("Error Code: ", err.errno)
-    print("<br> SQL State: ", err.sqlstate)
-    print("<br> Error Message: ", err.msg)
+except mysql.connector.Error as err:
+    print("Something went wrong<br><meta http-equiv = 'refresh' content = 'time; URL=404-notfound.html'/>")

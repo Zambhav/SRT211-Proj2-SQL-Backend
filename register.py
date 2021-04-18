@@ -75,6 +75,3 @@ try:
     mydb.close()
 except mysql.connector.Error as err:
     print("Something went wrong<br><meta http-equiv = 'refresh' content = 'time; URL=404-notfound.html'/>")
-# For Debugging
-    # print(mycursor.rowcount)
-    # print(mycursor.fetchall())
