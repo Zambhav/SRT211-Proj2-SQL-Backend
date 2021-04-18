@@ -58,7 +58,7 @@ try:
         for x in myresult:
             for empid in x:
                 print("<h3>Your employee id is", empid,
-                      "<br>Please don't lose your Employee ID number.</h3>")
+                      "<br>Please don't lose your Employee ID number.</h3> <a href='Login.html' class='login-forgot-pass'>Login</a>")
                 # Creating cursor for password
                 mycursor3 = mydb.cursor(buffered=True)
                 # Passes query
