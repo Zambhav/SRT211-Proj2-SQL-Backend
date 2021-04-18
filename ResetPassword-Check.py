@@ -30,7 +30,7 @@ try:
     num = mycursor.rowcount
 
     # Open reset passwords html with the employee id populated
-    forwardPage = open("ResetPassword-Rest.html").read().format(emp_id=empID)
+    forwardPage = open("ResetPassword-Reset.html").read().format(emp_id=empID)
 
     # checks if the info is correct, if yes open correct page. else give warning. 
     if num == 1:
