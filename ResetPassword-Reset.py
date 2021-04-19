@@ -34,5 +34,5 @@ try:
     # Closing cursor
     mycursor.close()
     mydb.close()
-except mysql.connector.Error as err:
+except:
     print("Something went wrong<br><meta http-equiv = 'refresh' content = 'time; URL=404-notfound.html'/>")

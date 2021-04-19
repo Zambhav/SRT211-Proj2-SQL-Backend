@@ -57,5 +57,5 @@ try:
     else:
         print("Content-Type: text/html \n\n")
         print("Contact administrator as user not found or password provided was wrong. Try resetting your password.")
-except mysql.connector.Error as err:
+except:
     print("Something went wrong<br><meta http-equiv = 'refresh' content = 'time; URL=404-notfound.html'/>")
